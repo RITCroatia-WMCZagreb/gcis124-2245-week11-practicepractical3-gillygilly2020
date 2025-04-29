@@ -2,9 +2,59 @@ public class FunWithThreads2 {
 
 
     //Constructor of FunWithThreads
-    public FunWithThreads2(){
+    public FunWithThreads2() throws InterruptedException{
         System.out.println("MAIN START");
         
+        
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Thread 1 start");
+                for (int i = 0; i < 10; i++) {
+                    System.out.println("thread1: "+i);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println("thread 1 end");
+            }
+        });
+        
+                
+        Thread thread2 = new Thread(new Runnable() {
+            
+            @Override
+            public void run() {
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+                System.out.println("Thread 2 start");
+                for (int i = 0; i < 10; i++) {
+                    System.out.println("thread 2: " + i);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println("thread 2 end");
+            }
+        });
+        
+
+        thread1.start();
+        thread2.start();
+        thread1.join();
+
         System.out.println("MAIN END");
     }
 

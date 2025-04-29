@@ -16,7 +16,14 @@ public class Temperature {
      * @return
      */
     public static TemperatureScale createF2C() {
-        TemperatureScale f2C = null;
+        TemperatureScale f2C = new TemperatureScale() {
+
+            @Override
+            public double convert(double temperature) {
+                return (temperature - 32) / 1.8;
+            }
+            
+        };
 
         // Delete from here
        
@@ -35,7 +42,7 @@ public class Temperature {
      * @return
      */
     public static TemperatureScale createC2F() {
-        TemperatureScale c2F = null;
+        TemperatureScale c2F = temp -> (1.8 * temp) + 32;
 
         // Delete from here
        
